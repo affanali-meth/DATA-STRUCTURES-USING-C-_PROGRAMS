@@ -1,0 +1,78 @@
+#include <stdio.h>
+#define MAX 5 // Define maximum size of the circular queue
+
+int CQ[MAX], front = 0, rear = 0, count = 0;
+
+// Function to insert an element into the circular queue
+void insertCQ() {
+    int data;
+    if (count == MAX) {
+        printf("\nCircular Queue is Full\n");
+    } else {
+        printf("\nEnter data: ");
+        scanf("%d", &data);
+        CQ[rear] = data;
+        rear = (rear + 1) % MAX;
+        count++;
+        printf("\nData Inserted in the Circular Queue\n");
+    }
+}
+
+// Function to delete an element from the circular queue
+void deleteCQ() {
+    if (count == 0) {
+        printf("\nCircular Queue is Empty\n");
+    } else {
+        printf("\nDeleted element from Circular Queue is %d\n", CQ[front]);
+        front = (front + 1) % MAX;
+        count--;
+    }
+}
+
+// Function to display elements in the circular queue
+void displayCQ() {
+    if (count == 0) {
+        printf("\nCircular Queue is Empty\n");
+    } else {
+        int i = front, j = count;
+        printf("\nElements in Circular Queue are: ");
+        while (j != 0) {
+            printf("%d ", CQ[i]);
+            i = (i + 1) % MAX;
+            j--;
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int choice;
+    do {
+        printf("\nCircular Queue Operations:\n");
+        printf("1. Insert\n");
+        printf("2. Delete\n");
+        printf("3. Display\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+        case 1:
+            insertCQ();
+            break;
+        case 2:
+            deleteCQ();
+            break;
+        case 3:
+            displayCQ();
+            break;
+        case 4:
+            printf("\nExiting...\n");
+            break;
+        default:
+            printf("\nInvalid choice! Please try again.\n");
+        }
+    } while (choice != 4);
+
+    return 0;
+}
